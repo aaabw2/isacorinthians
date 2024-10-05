@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISA</title>
+    <link rel="icon" href="CO.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000; /* Fundo preto para dar contraste ao vídeo */
+            overflow: hidden; /* Esconde rolagem */
+        }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cobre toda a área */
+            z-index: -1; /* Fica atrás do conteúdo */
+        }
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            z-index: 0;
+            animation: float 4s ease-in-out infinite; /* Animação de flutuação */
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+        .content {
+            color: #fd04b2;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            max-width: 80%; /* Limita a largura do texto */
+            margin: 5% auto; /* Espaçamento superior para desktops */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            line-height: 1.6; /* Melhor espaçamento entre linhas */
+        }
+        h1 {
+            font-size: 4em; /* Tamanho do título para desktop */
+            margin-bottom: 20px; /* Espaço entre título e parágrafos */
+        }
+        /* Estilo para mobile */
+        @media (max-width: 768px) {
+            .content {
+                font-size: 3.5vw; /* Tamanho da fonte mais compacto para dispositivos móveis */
+                margin: 10% auto; /* Espaçamento superior ajustado */
+                line-height: 1.4; /* Menor espaçamento entre linhas para maior legibilidade */
+            }
+            h1 {
+                font-size: 5.5vw; /* Tamanho do título adaptado para dispositivos móveis */
+            }
+        }
+        /* Estilo da barra de volume */
+        .volume-control {
+            position: absolute;
+            bottom: 20px; /* Distância do fundo */
+            right: 20px; /* Distância da direita */
+            z-index: 2; /* Acima do vídeo */
+            display: none; /* Esconde por padrão */
+        }
+        /* Estilo do slider de volume */
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px; /* Largura da barra de volume */
+            height: 5px; /* Altura da barra */
+            background: #fd04b2; /* Cor da barra */
+            border-radius: 5px; /* Bordas arredondadas */
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px; /* Largura do thumb */
+            height: 15px; /* Altura do thumb */
+            border-radius: 50%; /* Thumb arredondado */
+            background: #fff; /* Cor do thumb */
+            cursor: pointer; /* Cursor em forma de ponteiro */
+        }
+        @media (min-width: 769px) {
+            .volume-control {
+                display: block; /* Mostra a barra de volume apenas no desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" id="video" autoplay muted loop>
+        <source src="video natt.mp4" type="video/mp4"> <!-- Substitua pelo caminho do seu vídeo -->
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+    <div class="content" onclick="tocarMusica()">
+        <h1>My girl 🤍</h1>
+        <p>Se eu fosse definir nossa amizade em uma palavra seria "gratidão", gratidão sem dúvidas é a melhor palavra para definir nossa amizade, sou muito grato a você isa, grato por cada momentos que passamos juntos, grato por cada risada, por cada sorriso, </p>
+        <p>Isa você é uma das pessoas mais incríveis que conheço, amo estar com você, sempre quando estamos juntos não importa se estou no pior dia da minha vida, só de estar com você eu consigo sorrir, eu consigo rir e me divertir, seu jeito de ser é incrível, eu amo esse seu jeito de ser, seu jeito único.
+            e cada momento que estamos juntos é único.</p>
+        <p>Muito obrigado isa por você ser você, você é incrível, divertida,
+            sorridente, gentil, educada, muito inteligente, tem um sorriso
+            muito lindo, é muito linda, você é maravilhosa e eu poderia ficar
+            aqui escrevendo todas as suas qualidades e mesmo assim não
+            conseguiria dizer o quão incrível você é, você é incrível e não
+            tem como falar ou escrever o quão incrível você porque apenas
+            palavras não podem lhe descrever.
+            Muito obrigado por tudo isa, eu te amo muito e espero que
+            nossa amizade dure p todo sempre</p>
+        <p>clica nas letras p vc ver um negocio KKKKKKKKKKKK</p>
+    </div>
+    <div class="volume-control">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.1" onchange="ajustarVolume(this.value)">
+    </div>
+    <script>
+        function criarCoracoes(num) {
+            for (let i = 0; i < num; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                heart.innerText = '❤️';
+                
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                
+                const tamanho = Math.random() * 20 + 15;
+                heart.style.fontSize = `${tamanho}px`;
+                document.body.appendChild(heart);
+            }
+        }
+        criarCoracoes(30);
+    </script>
+    <audio id="musica" loop>
+        <source src="natt.ogg" type="audio/ogg">
+        
+    </audio>
+    <script>
+        function tocarMusica() {
+            var audio = document.getElementById('musica');
+            audio.play();
+            var video = document.getElementById('video');
+            video.play(); // Tocar vídeo quando a música é iniciada
+        }
+        var audio = document.getElementById('musica');
+        audio.volume = 0.1;  // Volume inicial de 10%
+
+        function ajustarVolume(valor) {
+            audio.volume = valor; // Ajusta o volume conforme o slider
+        }
+    </script>
+</body>
+</html>
